@@ -4,7 +4,7 @@
 	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>Java-In-Heroku Maven Webapp</display-name> <!--Thông tin về ứng dụng-->
+	<display-name>Java-In-Heroku Maven Webapp</display-name>
 
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
@@ -27,6 +27,23 @@
 	<listener>
 		<listener-class>
       org.springframework.web.context.ContextLoaderListener
-    </listener-class>
+    	</listener-class>
 	</listener>
+
+	<filter>  
+        <filter-name>encodingFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+        <init-param>  
+            <param-name>encoding</param-name>  
+            <param-value>UTF-8</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>forceEncoding</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>encodingFilter</filter-name>  
+        <url-pattern>/</url-pattern>  
+    </filter-mapping>
 </web-app>

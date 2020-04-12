@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Java-In-Heroku:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Java-In-Heroku.war">
+      <element id="artifact" artifact-name="Java-In-Heroku:war exploded" />
+    </root>
+  </artifact>
+</component>

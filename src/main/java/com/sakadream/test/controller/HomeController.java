@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sakadream.test.bean.Employee;
-import com.sakadream.test.model.Functions;;
+import com.sakadream.test.model.Functions;
+import com.sakadream.test.model.Video;
 
 @Controller
 public class HomeController {
     Functions fn = new Functions();
+
+    Video videoFunction = new Video();
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -110,4 +113,16 @@ public class HomeController {
             return "index";
         }
     }
-}
+
+
+    @RequestMapping(value = "/youtube", method = RequestMethod.GET)
+    public String youtube(HttpSession session, ModelMap model) throws Exception {
+        if (fn.checkSession(session)) {
+            model.addAttribute("listInfor", videoFunction.getYoutubeInfor("xxx"));
+            return "youtube";
+        } else {
+            return "index";
+        }
+    }
+
+   }

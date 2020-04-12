@@ -49,7 +49,7 @@
             <div class="container">
                 <footer>
                     <p>
-                        &copy; <a href="http://sakadream.me">sakadream.me</a> 2017
+                        &copy; <a href="">NGUYEN Quoc</a> 2017
                     </p>
                 </footer>
             </div>

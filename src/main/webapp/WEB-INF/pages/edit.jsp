@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+ <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
         <html lang="en">
@@ -50,7 +50,7 @@
             <div class="container">
                 <footer>
                     <p>
-                        &copy; <a href="http://sakadream.me">sakadream.me</a> 2017
+                        &copy; <a href="">NGUYEN Quoc</a> 2017
                     </p>
                 </footer>
             </div>

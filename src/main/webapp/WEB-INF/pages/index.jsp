@@ -15,7 +15,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="https://java-in-heroku.herokuapp.com/">Java Spring Example</a>
+                <a class="navbar-brand" href="">Java Spring Example</a>
             </div>
         </div>
     </nav>

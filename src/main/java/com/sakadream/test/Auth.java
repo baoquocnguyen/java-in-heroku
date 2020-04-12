@@ -37,7 +37,8 @@ public class Auth {
     /**
      * This is the directory that will be used under the user's home directory where OAuth tokens will be stored.
      */
-    private static final String CREDENTIALS_DIRECTORY = ".oauth-credentials";
+    //private static final String CREDENTIALS_DIRECTORY = ".oauth-credentials";
+    private static final String CREDENTIALS_DIRECTORY = "oauth-credentials";
 
     /**
      * Authorizes the installed application to access user's protected data.
@@ -61,7 +62,19 @@ public class Auth {
         }
 
         // This creates the credentials datastore at ~/.oauth-credentials/${credentialDatastore}
-        FileDataStoreFactory fileDataStoreFactory = new FileDataStoreFactory(new File(System.getProperty("user.home") + "/" + CREDENTIALS_DIRECTORY));
+        String path = "src/main/resources";
+        FileDataStoreFactory fileDataStoreFactory = new FileDataStoreFactory(new File(path + "/" + CREDENTIALS_DIRECTORY));
+        //FileDataStoreFactory fileDataStoreFactory = new FileDataStoreFactory();
+
+
+//        File file = new File(path);
+//        String absolutePath = file.getAbsolutePath();
+//
+//        System.out.println(absolutePath);
+//        File currentDirectory = new File(new File(".").getAbsolutePath());
+//        System.out.println(currentDirectory.getCanonicalPath());
+
+        System.out.println(fileDataStoreFactory.getDataDirectory());
         DataStore<StoredCredential> datastore = fileDataStoreFactory.getDataStore(credentialDatastore);
 
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(

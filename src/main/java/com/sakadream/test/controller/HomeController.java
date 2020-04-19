@@ -23,17 +23,19 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password,
-            HttpSession session, ModelMap model) throws Exception {
-        if (fn.checkLogin(username, password, session)) {
-            model.addAttribute("list", fn.showAllEmployees());
-            return "employees";
-        } else {
-            model.addAttribute("error", 1);
-            return "index";
-        }
-    }
+
+
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String login(@RequestParam("usernameId") String usernameId, @RequestParam("password") String password,
+//            HttpSession session, ModelMap model) throws Exception {
+//        if (fn.checkLogin(usernameId, password, session)) {
+//            model.addAttribute("list", fn.showAllEmployees());
+//            return "pagesYoutube/userspace";
+//        } else {
+//            model.addAttribute("error", 1);
+//            return "index";
+//        }
+//    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {

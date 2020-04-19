@@ -11,6 +11,7 @@
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
+
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container">
@@ -26,7 +27,7 @@
                 <legend>Login</legend>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                    <input type="text" class="form-control" id="usernameId" name="usernameId" placeholder="UsernameId">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">

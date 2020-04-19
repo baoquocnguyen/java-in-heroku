@@ -10,9 +10,9 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.VideoListResponse;
 import com.google.common.collect.Lists;
 import com.sakadream.test.Auth;
-
-import com.sakadream.test.bean.YoutubeEntity;
 import com.sakadream.test.bean.VideoYouTube;
+import com.sakadream.test.bean.YoutubeEntity;
+import com.sakadream.test.bean.User;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -33,7 +33,7 @@ import static com.google.api.client.util.Data.isNull;
  *
  * @author NGUYEN Bao Quoc
  */
-public class Video {
+public class UserSpace {
 
     /**
      * Define a global instance of a YouTube object, which will be used to make
@@ -56,7 +56,7 @@ public class Video {
     Connection conn;
     Statement stmt;
 
-    public Video() {
+    public UserSpace() {
     }
 
     private void connect() throws Exception {
@@ -129,10 +129,10 @@ public class Video {
 ////            t.printStackTrace();
 ////        }
 //
-        //Video videoObject = new Video();
+        UserSpace videoObject = new UserSpace();
         //videoObject.addVideoYouTube(new VideoYouTube("rcxpVWR5JYA",1,2,12,1,true));
-        //List<VideoYouTube> listYoutube = videoObject.showAllVideoYouTube();
-        //System.out.println(listYoutube.size());
+        List<VideoYouTube> listYoutube = videoObject.showAllVideoYouTubeByUserId("quoc123");
+        System.out.println(listYoutube.size());
 
     }
 
@@ -207,24 +207,26 @@ public class Video {
         return listYoutubeEntity;
     }
 
-    public VideoYouTube getYoutubeVideo(int id) throws Exception {
+    public VideoYouTube getYoutubeVideo(String id) throws Exception {
         connect();
         stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"VideoYoutubes\" WHERE \"ID\" = " + id);
         while(rs.next()) {
+            cleanConnection();
             return new VideoYouTube(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getBoolean(9));
         }
         throw new RuntimeException();
     }
 
-    public  List<VideoYouTube> showAllVideoYouTube() throws Exception {
+    public  List<VideoYouTube> showAllVideoYouTubeByUserId(String UserId) throws Exception {
 
 
         List<VideoYouTube> list = new ArrayList<>();
         connect();
 
         stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"VideoYouTubes\" ORDER BY \"VideoID\" ASC");
+
+        ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"VideoYouTubes\" WHERE \"UserID\" = "+"'"+UserId+"'");
         while (rs.next()) {
             VideoYouTube video = new VideoYouTube(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getBoolean(9));
             list.add(video);
@@ -234,40 +236,18 @@ public class Video {
         return list;
     }
 
-    public  List<VideoYouTube> viewOthersVideoYouTube(String userId) throws Exception {
 
-
-        List<VideoYouTube> list = new ArrayList<>();
+    public User getUser(String UserId) throws Exception {
         connect();
-
         stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"VideoYouTubes\" WHERE \"UserID\" != "+"'"+userId+"'" + "ORDER BY \"VideoID\" ASC");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"Users\" WHERE \"UserID\" = " + "'"+UserId+"'");
+        while(rs.next()) {
 
-        while (rs.next()) {
-            VideoYouTube video = new VideoYouTube(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getBoolean(9));
-            list.add(video);
+            User user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            cleanConnection();
+            return user;
         }
-
-        cleanConnection();
-        return list;
-    }
-
-    public  List<VideoYouTube> myAllVideoYouTube(String userId) throws Exception {
-
-
-        List<VideoYouTube> list = new ArrayList<>();
-        connect();
-
-        stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"VideoYouTubes\" WHERE \"UserID\" = "+"'"+userId+"'" + "ORDER BY \"VideoID\" ASC");
-
-        while (rs.next()) {
-            VideoYouTube video = new VideoYouTube(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getBoolean(9));
-            list.add(video);
-        }
-
-        cleanConnection();
-        return list;
+        throw new RuntimeException();
     }
 
 
@@ -303,7 +283,7 @@ public class Video {
             e.printStackTrace();
         }
 
-        stmt.executeUpdate("INSERT INTO public.\"VideoYouTubes\" (\"VideoID\", \"UserID\", \"CoinValue\", \"DailyClick\", \"TotalClick\", \"ViewCount\", \"LikeCount\", \"DislikeCount\", \"Active\") "
+        stmt.executeUpdate("INSERT INTO public.\"VideoYouTubes\" (\"VideoID\", \"UserID\", \"CoinValue\", \"DailyClick\", \"TotalClick\", \"ViewCount\", \"LikeCount\", \"DisLikeCount\", \"Active\") "
                         + "VALUES "
                         + "('" + video.videoId + "', '" + video.getUserId() + "', '" + video.getCoinValue() + "', '" + video.getDailyClick() + "', '" + video.getTotalClick()
                         + "', '" + viewCount + "', '" + likeCount +"', '"+ dislikeCount+"', '"+video.active + "')");

@@ -27,6 +27,7 @@
                     <thead>
                         <tr><a href="/add.htm" style="margin-bottom: 20px;" class="fa fa-plus btn btn-success">Add New</a></tr>
                         <tr><a href="/youtube.htm" style="margin-bottom: 20px;" class="fa fa-plus btn btn-success">You Tube</a></tr>
+                        <tr><a href="/videoyoutube.htm" style="margin-bottom: 20px;" class="fa fa-plus btn btn-success">videoyoutube page</a></tr>
                         <tr>
                             <th>ID</th>
                             <th>Full Name</th>

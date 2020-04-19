@@ -37,13 +37,13 @@ import com.sakadream.test.bean.Employee;
 //                }
             }
 
-            public Boolean checkLogin(String username, String password, HttpSession session) throws Exception {
+            public Boolean checkLogin(String usernameId, String password, HttpSession session) throws Exception {
                 connect();
                 stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"USERS\""
-                        + " WHERE \"USERNAME\" LIKE '" + username + "' AND \"PASSWORD\" LIKE '" + password + "'");
+                ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"Users\""
+                        + " WHERE \"UserID\" LIKE '" + usernameId + "' AND \"PASSWORD\" LIKE '" + password + "'");
                 while(rs.next()) {
-                    session.setAttribute("username", username);
+                    session.setAttribute("usernameId", usernameId);
                     return true;
                 }
                 return false;
@@ -108,6 +108,6 @@ import com.sakadream.test.bean.Employee;
             }
 
             public Boolean checkSession(HttpSession session) {
-                return (session.getAttribute("username") != null) ? true : false;
+                return (session.getAttribute("usernameId") != null) ? true : false;
             }
         }

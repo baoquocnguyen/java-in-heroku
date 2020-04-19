@@ -208,9 +208,9 @@
                         <button type="button" class="list-group-item list-group-item-action active">
                            YouTube
                         </button>
-                        <button type="button" class="list-group-item list-group-item-action">YouTube Subcribe</button>
+                        <a href="/videoyoutube-view.htm" type="button" class="list-group-item list-group-item-action">ouTube Subcribe</a>
                         <a href="/videoyoutube-view.htm" type="button" class="list-group-item list-group-item-action">YouTube View</a>
-                        <button type="button" class="list-group-item list-group-item-action" disabled>YouTube Like</button>
+                        <a href="/videoyoutube-view.htm" type="button" class="list-group-item list-group-item-action">YouTube Like</a>
                     </div>
 
                     <div class="card">

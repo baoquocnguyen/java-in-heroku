@@ -2,5 +2,5 @@
 
 mvn clean package
 
-run 
+run : 
 java -war target/dependency/webapp-runner.jar target/*.war

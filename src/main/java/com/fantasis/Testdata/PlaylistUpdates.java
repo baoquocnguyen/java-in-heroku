@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
-package com.sakadream.test.data;
+package com.fantasis.Testdata;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
-import com.sakadream.test.Auth;
+import com.fantasis.Auth;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
 import com.google.common.collect.Lists;

@@ -1,4 +1,4 @@
-package com.sakadream.test.bean;
+package com.fantasis.bean;
 
 public class User {
     private String userId;

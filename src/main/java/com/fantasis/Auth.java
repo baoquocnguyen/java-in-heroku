@@ -1,4 +1,4 @@
-package com.sakadream.test;
+package com.fantasis;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.StoredCredential;
@@ -20,7 +20,7 @@ import java.io.Reader;
 import java.util.List;
 
 /**
- * Shared class used by every sample. Contains methods for authorizing a user and caching credentials.
+ * This class to help our system to connect Youtube API
  */
 public class Auth {
 
@@ -64,15 +64,6 @@ public class Auth {
         // This creates the credentials datastore at ~/.oauth-credentials/${credentialDatastore}
         String path = "src/main/resources";
         FileDataStoreFactory fileDataStoreFactory = new FileDataStoreFactory(new File(path + "/" + CREDENTIALS_DIRECTORY));
-        //FileDataStoreFactory fileDataStoreFactory = new FileDataStoreFactory();
-
-
-//        File file = new File(path);
-//        String absolutePath = file.getAbsolutePath();
-//
-//        System.out.println(absolutePath);
-//        File currentDirectory = new File(new File(".").getAbsolutePath());
-//        System.out.println(currentDirectory.getCanonicalPath());
 
         System.out.println(fileDataStoreFactory.getDataDirectory());
         DataStore<StoredCredential> datastore = fileDataStoreFactory.getDataStore(credentialDatastore);

@@ -3,7 +3,7 @@
  * See instructions for running these code samples locally:
  * https://developers.google.com/explorer-help/guides/code_samples#java
  */
-package com.sakadream.test.data;
+package com.fantasis.Testdata;
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;

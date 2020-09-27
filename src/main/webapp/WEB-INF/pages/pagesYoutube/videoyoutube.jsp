@@ -191,7 +191,7 @@
                 <button type="button" class="list-group-item list-group-item-action active">
                     YouTube
                 </button>
-                <a href="/videoyoutube-view.htm" type="button" class="list-group-item list-group-item-action">ouTube Subcribe</a>
+                <a href="/videoyoutube-view.htm" type="button" class="list-group-item list-group-item-action">YouTube Subcribe</a>
                 <a href="/videoyoutube-view.htm" type="button" class="list-group-item list-group-item-action">YouTube View</a>
                 <a href="/videoyoutube-view.htm" type="button" class="list-group-item list-group-item-action">YouTube Like</a>
             </div>

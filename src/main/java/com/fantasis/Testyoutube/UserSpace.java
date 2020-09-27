@@ -2,17 +2,17 @@
  * Copyright (c) 2020 Google Inc.
  */
 
-package com.sakadream.test.model;
+package com.fantasis.Testyoutube;
 
+import com.fantasis.Auth;
+import com.fantasis.bean.User;
+import com.fantasis.bean.VideoYouTube;
+import com.fantasis.bean.YoutubeEntity;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.VideoListResponse;
 import com.google.common.collect.Lists;
-import com.sakadream.test.Auth;
-import com.sakadream.test.bean.VideoYouTube;
-import com.sakadream.test.bean.YoutubeEntity;
-import com.sakadream.test.bean.User;
 
 import java.io.IOException;
 import java.math.BigInteger;

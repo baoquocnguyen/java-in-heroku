@@ -12,18 +12,16 @@
  * the License.
  */
 
-package com.sakadream.test.data;
+package com.fantasis.Testyoutube;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.services.youtube.model.*;
-import com.sakadream.test.Auth;
+import com.fantasis.Auth;
 import com.google.api.services.youtube.YouTube;
 import com.google.common.collect.Lists;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -32,7 +30,7 @@ import java.util.List;
  *
  * @author Ibrahim Ulukaya
  */
-public class AddSubscription {
+public class ChanelYoutube {
 
     /**
      * Define a global instance of a Youtube object, which will be used

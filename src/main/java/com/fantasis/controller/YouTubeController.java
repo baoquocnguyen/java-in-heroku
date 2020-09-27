@@ -1,10 +1,9 @@
-package com.sakadream.test.controller;
+package com.fantasis.controller;
 
-
-import com.sakadream.test.bean.VideoYouTube;
-import com.sakadream.test.model.Functions;
-import com.sakadream.test.model.Video;
-import com.sakadream.test.model.UserSpace;
+import com.fantasis.bean.VideoYouTube;
+import com.fantasis.model.Functions;
+import com.fantasis.model.Video;
+import com.fantasis.model.UserSpace;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,24 +21,34 @@ public class YouTubeController {
     Video videoFunction = new Video();
     UserSpace userspace = new UserSpace();
 
+    // welcome page
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+        return "index";
+    }
+
+    // logout page
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "index";
+    }
+
+    // login page with id and password (admin1/admin1)
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("usernameId") String usernameId, @RequestParam("password") String password,
             HttpSession session, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+        // if you have valide account, go to user page/ home page
+        // else you still login page
         if (fn.checkLogin(usernameId, password, session)) {
             model.addAttribute("user", userspace.getUser(usernameId));
 
-
                 System.out.println("Redirect to ShowMeServlet");
-
-                // contextPath: Là một String rỗng "" hoặc khác rỗng.
-                // Nếu khác rỗng, nó luôn bắt đầu bởi /
-                // và không kết thúc bởi /
                 String contextPath = request.getContextPath();
-
                 // ==> /ServletTutorial/showMe
                 response.sendRedirect(contextPath + "/home.htm");
 
-            //response.sendRedirect( "http://localhost:8080/userspace.htm");
             return "home";
         } else {
             model.addAttribute("error", 1);
@@ -47,6 +56,7 @@ public class YouTubeController {
         }
     }
 
+    // if you have valide account, go to user page/ home page
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String userspace(HttpSession session, ModelMap model) throws Exception {
         if (fn.checkSession(session)) {
@@ -58,6 +68,7 @@ public class YouTubeController {
     }
 
 
+    // Show all my video in my user space, get list video by usernameId
     @RequestMapping(value = "/videoyoutube", method = RequestMethod.GET)
     public String youtube(HttpSession session, ModelMap model) throws Exception {
         if (fn.checkSession(session)) {
@@ -68,6 +79,7 @@ public class YouTubeController {
         }
     }
 
+    // Show all the video of other users in my activies pages, get all video by condition <> usernameId
     @RequestMapping(value = "/videoyoutube-view", method = RequestMethod.GET)
     public String youtubeview(HttpSession session, ModelMap model) throws Exception {
         if (fn.checkSession(session)) {
@@ -78,7 +90,7 @@ public class YouTubeController {
         }
     }
 
-
+    // Add new video in my user space in order to increase its like, views.
     @RequestMapping(value = "/add-videoyoutube", method = RequestMethod.POST)
     public String addvideoyoutube(@RequestParam("VideoID") String VideoID, @RequestParam("CoinValue") int CoinValue,
                                   @RequestParam("DailyClick") int DailyClick, @RequestParam("TotalClick") int TotalClick,
@@ -86,16 +98,8 @@ public class YouTubeController {
         if (fn.checkSession(session)) {
             videoFunction.addVideoYouTube(new VideoYouTube(VideoID, session.getAttribute("usernameId").toString(), CoinValue, DailyClick, TotalClick,Active));
             model.addAttribute("listVideoYouTube", videoFunction.showAllVideoYouTube());
-
-
-
-            System.out.println("Redirect to videoyoutube page");
-
-            // contextPath: Là một String rỗng "" hoặc khác rỗng.
-            // Nếu khác rỗng, nó luôn bắt đầu bởi /
-            // và không kết thúc bởi /
+            System.out.println("Redirect to videoyoutube");
             String contextPath = request.getContextPath();
-
             // ==> /ServletTutorial/showMe
             response.sendRedirect(contextPath + "/videoyoutube.htm");
 
@@ -106,6 +110,7 @@ public class YouTubeController {
     }
 
 
+    // go to Add video youtube page
     @RequestMapping(value = "/addvideoyoutube", method = RequestMethod.GET)
     public String add(HttpSession session) {
         if (fn.checkSession(session)) {
@@ -116,6 +121,7 @@ public class YouTubeController {
     }
 
 
+    // delete video youtube
     @RequestMapping(value = "/delete-videoyoutube", method = RequestMethod.GET)
     public String delete(@RequestParam("id") String id, HttpSession session, ModelMap model) throws Exception {
         if (fn.checkSession(session)) {

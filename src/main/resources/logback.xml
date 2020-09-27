@@ -11,7 +11,7 @@
 	    </layout>
 	</appender>
 
-	<logger name="com.sakadream.controller" level="debug"
+	<logger name="com.fantasis.controller" level="debug"
 		additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>

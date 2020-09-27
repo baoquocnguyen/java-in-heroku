@@ -1,5 +1,7 @@
 package com.sakadream.test.model;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import javax.servlet.http.HttpSession;
 
 import com.sakadream.test.bean.Employee;
@@ -16,25 +19,36 @@ import com.sakadream.test.bean.Employee;
             Statement stmt;
 
             private void connect() throws Exception {
-                Class.forName("org.postgresql.Driver");
-                //try {
-                    URI dbUri = new URI("postgres://rumyltvuvhqebi:6c99249bc431d975975d446d025af21c90aa43d52400683667af35020f18cea6@ec2-52-87-58-157.compute-1.amazonaws.com:5432/d55rq9a6uq81fb");
-                    //String username = dbUri.getUserInfo().split(":")[0];
-                    //String password = dbUri.getUserInfo().split(":")[1];
-                    //String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
-                    String username = "rumyltvuvhqebi";
-                    String password = "6c99249bc431d975975d446d025af21c90aa43d52400683667af35020f18cea6";
-                    String dbUrl = "jdbc:postgresql://ec2-52-87-58-157.compute-1.amazonaws.com:5432/d55rq9a6uq81fb?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
+                    String dbUrl = new String();
+                    String username = new String();
+                    String password = new String();
+
+                //Class.forName("org.postgresql.Driver");
+
+                    try (InputStream input = Functions.class.getClassLoader().getResourceAsStream("youtube.properties")) {
+
+                        Properties prop = new Properties();
+
+                        if (input == null) {
+                            System.out.println("Sorry, unable to find config.properties");
+                            return;
+                        }
+
+                        //load a properties file from class path, inside static method
+                        prop.load(input);
+
+                        //get the property value and print it out
+                        dbUrl = prop.getProperty("com.fantasis.url");
+                        username = prop.getProperty("com.fantasis.username");
+                        password = prop.getProperty("com.fantasis.password");
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
                     conn = DriverManager.getConnection(dbUrl, username, password);
-//                //} catch(Exception e) {
-//                    URI dbUri = new URI(System.getenv("DATABASE_URL"));
-//                    String username = dbUri.getUserInfo().split(":")[0];
-//                    String password = dbUri.getUserInfo().split(":")[1];
-//                    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-//
-//                    conn = DriverManager.getConnection(dbUrl, username, password);
-//                }
+
             }
 
             public Boolean checkLogin(String usernameId, String password, HttpSession session) throws Exception {

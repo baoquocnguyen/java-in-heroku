@@ -22,7 +22,7 @@ public class YouTubeController {
     Video videoFunction = new Video();
     UserSpace userspace = new UserSpace();
 
-        @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("usernameId") String usernameId, @RequestParam("password") String password,
             HttpSession session, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception {
         if (fn.checkLogin(usernameId, password, session)) {
